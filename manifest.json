@@ -1,0 +1,10 @@
+{
+  "name": "ATH OWAY SERVICES",
+  "short_name": "ATH OWAY",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#11120f",
+  "theme_color": "#11120f",
+  "lang": "my",
+  "description": "နေပြည်တော် ATH OWAY SERVICES"
+}
