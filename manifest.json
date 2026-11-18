@@ -1,0 +1,37 @@
+{
+  "id": "./index.html",
+  "name": "ATH OWAY SERVICES",
+  "short_name": "ATH OWAY",
+  "description": "ATH OWAY ခရီးသွားနှင့် ပို့ဆောင်ရေး ဝန်ဆောင်မှု",
+  "lang": "my",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "orientation": "portrait",
+  "background_color": "#11120f",
+  "theme_color": "#11120f",
+  "icons": [
+    {
+      "src": "./images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./images/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
