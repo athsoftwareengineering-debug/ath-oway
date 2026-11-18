@@ -745,33 +745,6 @@ img { display: block; max-width: 100%; }
 }
 
 /* ===== BACK TO TOP ===== */
-.back-to-top {
-  position: fixed;
-  bottom: 95px;
-  right: 20px;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  border: none;
-  background: linear-gradient(135deg, var(--gold2), var(--gold));
-  color: #211b0f;
-  font-size: 20px;
-  cursor: pointer;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(10px);
-  transition: 0.3s;
-  z-index: 50;
-  box-shadow: 0 8px 24px rgba(214,173,87,0.4);
-}
-.back-to-top.show {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
-}
-
-
-/* ===== BACK TO TOP ===== */
 .back-to-top { position:fixed; right:18px; bottom:100px; z-index:50; width:46px; height:46px; border:1px solid rgba(214,173,87,.55); border-radius:50%; background:linear-gradient(135deg,var(--gold2),var(--gold)); color:#211b0f; font-size:21px; font-weight:800; cursor:pointer; box-shadow:0 8px 24px rgba(214,173,87,.28); opacity:0; pointer-events:none; transform:translateY(10px); transition:.25s; }
 .back-to-top.show { opacity:1; pointer-events:auto; transform:translateY(0); }
 @media(min-width:900px){ .back-to-top{bottom:24px;} .mobile-nav{display:none;} body{padding-bottom:0;} }
@@ -846,7 +819,7 @@ img { display: block; max-width: 100%; }
     <a class="brand" href="#home" aria-label="ATH OWAY ပင်မ">
       <span class="mark">ATH</span>
       <span>
-        <b>နေပြည်တော် ATH OWAY SERVICES</b>
+        <b id="brandName">နေပြည်တော် ATH OWAY SERVICES</b>
         <small>TRAVEL & TRANSPORT SERVICE</small>
       </span>
     </a>
@@ -860,7 +833,7 @@ img { display: block; max-width: 100%; }
     </nav>
     <div class="header-actions">
       <button class="icon-btn" id="themeToggle" aria-label="အရောင်ပြောင်းရန်">🌙</button>
-      <a class="btn gold" href="tel:09789999368">☎ ဖုန်းခေါ်ရန်</a>
+      <a class="btn gold" href="tel:09789999368" id="headerCallBtn">☎ ဖုန်းခေါ်ရန်</a>
     </div>
   </div>
 </header>
@@ -872,14 +845,14 @@ img { display: block; max-width: 100%; }
   <div class="wrap">
     <div class="hero-box">
       <div class="hero-copy">
-        <div class="eyebrow">NAYPYIDAW • TRUSTED LOCAL TRANSPORT</div>
-        <h1>သွားလိုရာခရီးကို<br><span>အဆင်ပြေချောမွေ့စွာ</span></h1>
-        <p>ဘုရားဖူးခရီးစဉ်၊ ခရီးသည်ပို့ဆောင်ရေးနှင့် ကုန်ပစ္စည်းပို့ဆောင်ရေး ဝန်ဆောင်မှုများကို ယုံကြည်စိတ်ချစွာ စီစဉ်ပို့ဆောင်ပေးပါသည်။</p>
+        <div class="eyebrow" id="heroEyebrow">NAYPYIDAW • TRUSTED LOCAL TRANSPORT</div>
+        <h1 id="heroTitle">သွားလိုရာခရီးကို<br><span>အဆင်ပြေချောမွေ့စွာ</span></h1>
+        <p id="heroText">ဘုရားဖူးခရီးစဉ်၊ ခရီးသည်ပို့ဆောင်ရေးနှင့် ကုန်ပစ္စည်းပို့ဆောင်ရေး ဝန်ဆောင်မှုများကို ယုံကြည်စိတ်ချစွာ စီစဉ်ပို့ဆောင်ပေးပါသည်။</p>
         <div class="actions">
-          <a class="btn gold" href="viber://chat?number=+959789999368">Viber ဖြင့် Booking</a>
-          <a class="btn outline" href="tel:09789999368">ဖုန်းဆက်သွယ်ရန်</a>
+          <a class="btn gold" href="viber://chat?number=+959789999368" id="heroViberBtn">Viber ဖြင့် Booking</a>
+          <a class="btn outline" href="tel:09789999368" id="heroCallBtn">ဖုန်းဆက်သွယ်ရန်</a>
         </div>
-        <div class="hours">နေ့စဉ် ဝန်ဆောင်ချိန် · နံနက် ၆:၀၀ မှ ည ၉:၀၀</div>
+        <div class="hours" id="hours">နေ့စဉ် ဝန်ဆောင်ချိန် · နံနက် ၆:၀၀ မှ ည ၉:၀၀</div>
       </div>
     </div>
   </div>
@@ -895,7 +868,7 @@ img { display: block; max-width: 100%; }
         <p class="sub">သင့်ခရီးစဉ်နှင့် လိုအပ်ချက်အလိုက် ဝန်ဆောင်မှုပေးပါသည်။</p>
       </div>
     </div>
-    <div class="grid">
+    <div class="grid" id="servicesGrid">
       <article class="card service reveal">
         <div class="symbol">✦</div>
         <div class="num">01 / PILGRIMAGE</div>
@@ -920,7 +893,7 @@ img { display: block; max-width: 100%; }
         <h3>ခရီးစဉ် ကြိုတင်စီစဉ်လိုပါသလား?</h3>
         <p>Viber မှတစ်ဆင့် ခရီးစဉ်အသေးစိတ် မေးမြန်းနိုင်ပါသည်။</p>
       </div>
-      <a class="btn gold" href="viber://chat?number=+959789999368">Viber မှ ဆက်သွယ်ရန် ↗</a>
+      <a class="btn gold" href="viber://chat?number=+959789999368" id="stripViberBtn">Viber မှ ဆက်သွယ်ရန် ↗</a>
     </div>
   </div>
 </section>
@@ -935,7 +908,7 @@ img { display: block; max-width: 100%; }
         <p class="sub">သွားရောက်လိုသည့်နေရာကို ရွေးချယ်ပြီး ခရီးစဉ်မေးမြန်းနိုင်ပါသည်။</p>
       </div>
     </div>
-    <div class="grid">
+    <div class="grid" id="placesGrid">
       <article class="card place reveal">
         <div class="place-visual">01</div>
         <div class="place-body">
@@ -998,7 +971,7 @@ img { display: block; max-width: 100%; }
         <p class="sub">အောက်ပါစျေးနှုန်းများသည် ခန့်မှန်းချေဖြစ်ပြီး ခရီးစဉ်အကွာအဝေးအလိုက် ပြောင်းလဲနိုင်ပါသည်။</p>
       </div>
     </div>
-    <div class="price-list reveal">
+    <div class="price-list reveal" id="priceList">
       <div class="price-row">
         <div class="price-row__name">မြို့တွင်း (၅ ကီလိုမီတာအတွင်း)</div>
         <div class="price-row__price">၅,၀၀၀ ကျပ်</div>
@@ -1034,7 +1007,7 @@ img { display: block; max-width: 100%; }
         <div class="kicker">VIBER BOOKING</div>
         <h3>ခရီးစဉ် ကြိုတင်မေးမြန်းရန်</h3>
         <p>အောက်ပါအချက်အလက်များ ဖြည့်ပြီး Viber ဖြင့် ဆက်သွယ်ပါ။ Booking အတည်ပြုရန် ဝန်ဆောင်မှုပေးသူထံမှ ပြန်လည်အတည်ပြုချက် ရယူပါ။</p>
-        <a class="btn outline" href="tel:09789999368">☎ 09789999368</a>
+        <a class="btn outline" href="tel:09789999368" id="bookingCallBtn">☎ 09789999368</a>
       </div>
       <form class="fields" id="bookingForm" novalidate>
         <input name="customer" placeholder="အမည် *" required autocomplete="name">
@@ -1143,9 +1116,9 @@ img { display: block; max-width: 100%; }
         <p>သုံးဘီးယာဉ် · ATH OWAY SERVICES</p>
       </div>
       <div class="specs">
-        <div class="spec"><small>ယာဉ်အမျိုးအစား</small><b>သုံးဘီးယာဉ်</b></div>
+        <div class="spec"><small>ယာဉ်အမျိုးအစား</small><b id="specVehicleType">သုံးဘီးယာဉ်</b></div>
         <div class="spec"><small>ယာဉ်မော်ဒယ်</small><b>Bajaj Maxima Z</b></div>
-        <div class="spec"><small>ဝန်ဆောင်မှုဧရိယာ</small><b>နေပြည်တော်နှင့် အနီးတစ်ဝိုက်</b></div>
+        <div class="spec"><small>ဝန်ဆောင်မှုဧရိယာ</small><b id="specArea">နေပြည်တော်နှင့် အနီးတစ်ဝိုက်</b></div>
         <div class="spec"><small>ဝန်ဆောင်မှုအချိန်</small><b>နံနက် ၆:၀၀ – ည ၉:၀၀</b></div>
       </div>
     </article>
@@ -1210,13 +1183,13 @@ img { display: block; max-width: 100%; }
     <article class="card profile reveal">
       <div class="profile-art"><span>ATH</span></div>
       <div class="profile-content">
-        <h3>အောင်သူထွေး</h3>
-        <div class="role">AUNG THU HTWE (ATH) · NAYPYIDAW ATH OWAY SERVICES</div>
+        <h3 id="ownerName">အောင်သူထွေး</h3>
+        <div class="role" id="ownerRole">AUNG THU HTWE (ATH) · NAYPYIDAW ATH OWAY SERVICES</div>
         <div class="details">
-          <div class="detail"><small>ဖုန်း / Viber</small><b>09789999368</b></div>
-          <div class="detail"><small>ဝန်ဆောင်မှုဧရိယာ</small><b>နေပြည်တော်နှင့် အနီးတစ်ဝိုက်</b></div>
+          <div class="detail" id="detailPhone"><small>ဖုန်း / Viber</small><b>09789999368</b></div>
+          <div class="detail" id="detailArea"><small>ဝန်ဆောင်မှုဧရိယာ</small><b>နေပြည်တော်နှင့် အနီးတစ်ဝိုက်</b></div>
           <div class="detail"><small>ဝန်ဆောင်မှုအချိန်</small><b>နေ့စဉ် ၆:၀၀ – ၂၁:၀၀</b></div>
-          <div class="detail"><small>ယာဉ်</small><b>Bajaj Maxima Z သုံးဘီး</b></div>
+          <div class="detail" id="detailVehicle"><small>ယာဉ်</small><b>Bajaj Maxima Z သုံးဘီး</b></div>
         </div>
         <div class="tags">
           <span class="tag">ဘုရားဖူးခရီးစဉ်</span>
@@ -1225,8 +1198,8 @@ img { display: block; max-width: 100%; }
           <span class="tag">မြို့တွင်းသွားလာရေး</span>
         </div>
         <div class="actions">
-          <a class="btn gold" href="tel:09789999368">ဖုန်းခေါ်ရန်</a>
-          <a class="btn outline" href="viber://chat?number=+959789999368">Viber စာပို့ရန်</a>
+          <a class="btn gold" href="tel:09789999368" id="profileCallBtn">ဖုန်းခေါ်ရန်</a>
+          <a class="btn outline" href="viber://chat?number=+959789999368" id="profileViberBtn">Viber စာပို့ရန်</a>
         </div>
       </div>
     </article>
@@ -1242,7 +1215,7 @@ img { display: block; max-width: 100%; }
       <a href="viber://chat?number=+959789999368" aria-label="Viber">💬</a>
       <a href="tel:09789999368" aria-label="ဖုန်း">📞</a>
     </div>
-    © 2026 <b>နေပြည်တော် ATH OWAY SERVICES</b><br>
+    © 2026 <b id="footBrandName">နေပြည်တော် ATH OWAY SERVICES</b><br>
     Developed by AUNG THU HTWE
   </div>
 </footer>
@@ -1276,6 +1249,178 @@ img { display: block; max-width: 100%; }
 
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
   const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+
+  /* =========================================================
+     ADMIN CONTENT SYNC
+     Admin panel (admin.html) မှ LocalStorage ထဲ သိမ်းထားသော
+     athOwayContentV1 ကို ဖတ်ပြီး Website ကို update လုပ်သည်။
+     ========================================================= */
+  const ADMIN_KEY = 'athOwayContentV1';
+
+  function escapeText(str) {
+    return String(str ?? '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function setText(sel, value) {
+    const el = typeof sel === 'string' ? $(sel) : sel;
+    if (el && value != null && value !== '') el.textContent = value;
+  }
+
+  function setHref(sel, value) {
+    const el = typeof sel === 'string' ? $(sel) : sel;
+    if (el && value) el.href = value;
+  }
+
+  function loadAdminContent() {
+    let saved = null;
+    try { saved = JSON.parse(localStorage.getItem(ADMIN_KEY) || 'null'); } catch (e) {}
+    if (!saved || typeof saved !== 'object') return;
+
+    const d = saved;
+
+    /* ---- HEADER / BRAND ---- */
+    if (d.businessName) {
+      setText('#brandName', d.businessName);
+      setText('#footBrandName', d.businessName);
+    }
+
+    /* ---- HERO ---- */
+    setText('#heroEyebrow', d.heroEyebrow);
+
+    if (d.heroTitle) {
+      // Title ကို <br><span> ပါအောင် ခွဲထည့် — ရိုးရှင်းစွာ escape လုပ်ပြီး ပထမ စာကြောင်းကို span လုပ်သည်
+      const heroTitleEl = $('#heroTitle');
+      if (heroTitleEl) {
+        const safe = escapeText(d.heroTitle);
+        // ခေါင်းစဉ်ကို "၊" သို့မဟုတ် space ဖြင့် ခွဲပြီး ဒုတိယပိုင်းကို gold span လုပ်မည်
+        // ရိုးရှင်းစွာ — တစ်ကြောင်းတည်း ထည့်လိုက်ပါ
+        heroTitleEl.innerHTML = safe;
+      }
+    }
+
+    setText('#heroText', d.heroText);
+    setText('#hours', d.hours);
+
+    /* ---- PHONE / VIBER LINKS ---- */
+    const cleanPhone = d.phone ? String(d.phone).replace(/[^\d+]/g, '') : '';
+    const cleanViber = d.viber ? String(d.viber).replace(/[^\d]/g, '') : '';
+
+    if (cleanPhone) {
+      // tel: link အားလုံး
+      ['#headerCallBtn', '#heroCallBtn', '#bookingCallBtn', '#profileCallBtn'].forEach(sel => {
+        setHref(sel, 'tel:' + cleanPhone);
+      });
+      $$('a[href^="tel:"]').forEach(a => { a.href = 'tel:' + cleanPhone; });
+      // Header button စာသား
+      const headerCall = $('#headerCallBtn');
+      if (headerCall) headerCall.textContent = '☎ ' + cleanPhone;
+      const bookingCall = $('#bookingCallBtn');
+      if (bookingCall) bookingCall.textContent = '☎ ' + cleanPhone;
+      // Profile phone detail
+      const dp = $('#detailPhone');
+      if (dp) {
+        const b = dp.querySelector('b');
+        if (b) b.textContent = cleanPhone;
+      }
+    }
+
+    if (cleanViber) {
+      const viberUrl = 'viber://chat?number=+' + cleanViber;
+      ['#heroViberBtn', '#stripViberBtn', '#profileViberBtn'].forEach(sel => {
+        setHref(sel, viberUrl);
+      });
+      $$('a[href^="viber://"]').forEach(a => { a.href = viberUrl; });
+    }
+
+    /* ---- PROFILE ---- */
+    setText('#ownerName', d.ownerName);
+
+    if (d.ownerName || d.businessName) {
+      const roleEl = $('#ownerRole');
+      if (roleEl) {
+        const nameEn = (d.ownerName || '').toUpperCase();
+        roleEl.textContent = (d.ownerName ? d.ownerName + ' · ' : '') + (d.businessName || '');
+      }
+    }
+
+    if (d.area) {
+      const da = $('#detailArea');
+      if (da) {
+        const b = da.querySelector('b');
+        if (b) b.textContent = d.area;
+      }
+      setText('#specArea', d.area);
+    }
+
+    if (d.vehicle) {
+      const dv = $('#detailVehicle');
+      if (dv) {
+        const b = dv.querySelector('b');
+        if (b) b.textContent = d.vehicle;
+      }
+      setText('#specVehicleType', d.vehicle);
+    }
+
+    /* ---- SERVICES (ရှိပြီးသား card များကို update) ---- */
+    if (Array.isArray(d.services)) {
+      const svcCards = $$('#servicesGrid .service');
+      d.services.forEach((s, i) => {
+        const card = svcCards[i];
+        if (!card) return;
+        const h3 = card.querySelector('h3');
+        const p = card.querySelector('p');
+        if (h3 && s.title) h3.textContent = s.title;
+        if (p && s.description) p.textContent = s.description;
+      });
+    }
+
+    /* ---- PLACES (ရှိပြီးသား card များကို update) ---- */
+    if (Array.isArray(d.places)) {
+      const placeCards = $$('#placesGrid .place');
+      d.places.forEach((pl, i) => {
+        const card = placeCards[i];
+        if (!card) return;
+        const h3 = card.querySelector('h3');
+        const p = card.querySelector('p');
+        const link = card.querySelector('a.btn');
+        if (h3 && pl.title) h3.textContent = pl.title;
+        if (p && pl.description) p.textContent = pl.description;
+        if (link && pl.map) link.href = pl.map;
+      });
+    }
+
+    /* ---- PRICES (ရှိပြီးသား row များကို update) ---- */
+    if (Array.isArray(d.prices)) {
+      const rows = $$('#priceList .price-row');
+      d.prices.forEach((pr, i) => {
+        const row = rows[i];
+        if (!row) return;
+        const nameEl = row.querySelector('.price-row__name');
+        const priceEl = row.querySelector('.price-row__price');
+        if (nameEl && pr.name) nameEl.textContent = pr.name;
+        if (priceEl && pr.price) priceEl.textContent = pr.price;
+      });
+    }
+
+    /* ---- document.title ---- */
+    if (d.businessName) {
+      document.title = 'ATH OWAY SERVICES | ' + (d.businessName.replace('နေပြည်တော် ', '') || 'Naypyidaw');
+    }
+  }
+
+  // စာမျက်နှာ load ဖြစ်တာနဲ့ တစ်ခါ run
+  loadAdminContent();
+
+  // အခြား tab မှာ Admin က သိမ်းလိုက်ရင် (same browser) ဒီ tab မှာ auto-refresh မလုပ်ဘဲ
+  // storage event ဖြင့် update လုပ်မည်
+  window.addEventListener('storage', (e) => {
+    if (e.key === ADMIN_KEY) loadAdminContent();
+  });
 
   /* ===== Toast ===== */
   const toast = $('#toast');
