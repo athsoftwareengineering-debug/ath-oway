@@ -22,9 +22,7 @@
   --green:#83c995;
 }
 
-* {
-  box-sizing:border-box;
-}
+* { box-sizing:border-box; }
 
 body {
   margin:0;
@@ -66,6 +64,7 @@ header {
   place-items:center;
   color:var(--gold2);
   font:bold 17px 'DM Sans';
+  flex-shrink:0;
 }
 
 h1 {
@@ -216,6 +215,22 @@ button,.button {
 .small {
   font-size:11px;
   color:var(--muted);
+}
+
+.badge {
+  display:inline-block;
+  padding:3px 9px;
+  border-radius:20px;
+  font-size:11px;
+  border:1px solid var(--line);
+  color:var(--muted);
+  margin-left:6px;
+}
+
+.badge.ok {
+  color:var(--green);
+  border-color:rgba(131,201,149,.4);
+  background:rgba(131,201,149,.08);
 }
 
 @media(max-width:650px) {
@@ -445,6 +460,11 @@ button,.button {
     Save လုပ်ပါက ဤ browser ၏ LocalStorage ထဲတွင်သာ
     သိမ်းဆည်းပါမည်။ အခြားဖုန်းနှင့် ကွန်ပျူတာများသို့
     အလိုအလျောက် မရောက်ပါ။
+    <br><br>
+    <b>အရေးကြီး:</b> ဤ admin.html နှင့် index.html ကို
+    <b>တူတူ host / folder</b> ထဲမှာ ထားရပါမည်။
+    (file:// ဖြင့် ဖွင့်ပါက LocalStorage မျှဝေမည် မဟုတ်ပါ။
+    localhost သို့မဟုတ် domain ဖြင့် ဖွင့်ပါ။)
   </p>
 
   <div class="actions">
@@ -489,13 +509,20 @@ button,.button {
 <script>
 'use strict';
 
-/* ADMIN PASSWORD */
+/* =========================================================
+   ADMIN PASSWORD
+   ========================================================= */
 const ADMIN_PASSWORD = 'ATH@2026';
 
+/* =========================================================
+   LOCALSTORAGE KEY — index.html နှင့် တူတူဖြစ်ရမည်
+   ========================================================= */
 const STORAGE_KEY = 'athOwayContentV1';
 
 
-/* DEFAULT WEBSITE DATA */
+/* =========================================================
+   DEFAULT WEBSITE DATA
+   ========================================================= */
 const DEFAULTS = {
 
   heroEyebrow:
@@ -629,7 +656,9 @@ const $ = id => document.getElementById(id);
 let data = JSON.parse(JSON.stringify(DEFAULTS));
 
 
-/* LOAD DATA */
+/* =========================================================
+   LOAD DATA from LocalStorage
+   ========================================================= */
 function loadData() {
 
   try {
@@ -665,7 +694,9 @@ function loadData() {
 }
 
 
-/* ESCAPE HTML */
+/* =========================================================
+   ESCAPE HTML
+   ========================================================= */
 function escapeHTML(value) {
 
   return String(value ?? '').replace(/[&<>"']/g, c => ({
@@ -681,20 +712,28 @@ function escapeHTML(value) {
 }
 
 
-/* INPUT HELPERS */
+/* =========================================================
+   INPUT HELPERS
+   ========================================================= */
 function setValue(id,value) {
-  $(id).value = value ?? '';
+  const el = $(id);
+  if (el) el.value = value ?? '';
 }
 
 function getValue(id) {
-  return $(id).value.trim();
+  const el = $(id);
+  return el ? el.value.trim() : '';
 }
 
 
-/* DYNAMIC LIST RENDER */
+/* =========================================================
+   DYNAMIC LIST RENDER
+   ========================================================= */
 function renderList(containerId,key,fields,labels) {
 
   const root = $(containerId);
+
+  if (!root) return;
 
   root.innerHTML = '';
 
@@ -775,7 +814,9 @@ function renderList(containerId,key,fields,labels) {
 }
 
 
-/* RENDER ALL */
+/* =========================================================
+   RENDER ALL LISTS
+   ========================================================= */
 function renderAllLists() {
 
   renderList(
@@ -840,7 +881,9 @@ function renderAllLists() {
 }
 
 
-/* FILL FORM */
+/* =========================================================
+   FILL FORM
+   ========================================================= */
 function fillForm() {
 
   [
@@ -866,7 +909,9 @@ function fillForm() {
 }
 
 
-/* READ FORM */
+/* =========================================================
+   READ FORM
+   ========================================================= */
 function readForm() {
 
   [
@@ -890,7 +935,9 @@ function readForm() {
 }
 
 
-/* SAVE */
+/* =========================================================
+   SAVE
+   ========================================================= */
 function save() {
 
   readForm();
@@ -903,19 +950,23 @@ function save() {
     );
 
     $('saveStatus').textContent =
-      'သိမ်းဆည်းပြီးပါပြီ။ ဤ browser ထဲတွင်သာ သက်ရောက်ပါမည်။';
+      '✅ သိမ်းဆည်းပြီးပါပြီ။ index.html ကို refresh လုပ်ပါ။ (ဒီ browser ထဲတွင်သာ သက်ရောက်ပါမည်။)';
+
+    // ဒီ tab မှာပဲ သိမ်းပြီး အခြား tab ကို storage event ဖြင့် update လုပ်မည်
 
   } catch(error) {
 
     $('saveStatus').textContent =
-      'သိမ်းဆည်း၍ မရပါ။ Browser storage ကို စစ်ဆေးပါ။';
+      '❌ သိမ်းဆည်း၍ မရပါ။ Browser storage ကို စစ်ဆေးပါ။';
 
   }
 
 }
 
 
-/* LOGIN */
+/* =========================================================
+   LOGIN
+   ========================================================= */
 function showAdmin() {
 
   $('loginPanel').classList.add('hidden');
@@ -942,7 +993,7 @@ $('loginBtn').addEventListener('click',() => {
   } else {
 
     $('loginStatus').textContent =
-      'Password မှားနေပါသည်။';
+      '❌ Password မှားနေပါသည်။';
 
   }
 
@@ -958,7 +1009,9 @@ $('password').addEventListener('keydown',event => {
 });
 
 
-/* LOGOUT */
+/* =========================================================
+   LOGOUT
+   ========================================================= */
 $('logoutBtn').addEventListener('click',() => {
 
   sessionStorage.removeItem('athAdminSession');
@@ -972,12 +1025,18 @@ $('logoutBtn').addEventListener('click',() => {
 });
 
 
-/* SAVE BUTTON */
+/* =========================================================
+   SAVE BUTTON
+   ========================================================= */
 $('saveBtn').addEventListener('click',save);
 
 
-/* ADD SERVICE */
+/* =========================================================
+   ADD SERVICE
+   ========================================================= */
 $('addService').addEventListener('click',() => {
+
+  readForm();
 
   data.services.push({
     title:'',
@@ -989,8 +1048,12 @@ $('addService').addEventListener('click',() => {
 });
 
 
-/* ADD PLACE */
+/* =========================================================
+   ADD PLACE
+   ========================================================= */
 $('addPlace').addEventListener('click',() => {
+
+  readForm();
 
   data.places.push({
     title:'',
@@ -1003,8 +1066,12 @@ $('addPlace').addEventListener('click',() => {
 });
 
 
-/* ADD PRICE */
+/* =========================================================
+   ADD PRICE
+   ========================================================= */
 $('addPrice').addEventListener('click',() => {
+
+  readForm();
 
   data.prices.push({
     name:'',
@@ -1016,7 +1083,9 @@ $('addPrice').addEventListener('click',() => {
 });
 
 
-/* EXPORT BACKUP */
+/* =========================================================
+   EXPORT BACKUP
+   ========================================================= */
 $('exportBtn').addEventListener('click',() => {
 
   readForm();
@@ -1041,7 +1110,9 @@ $('exportBtn').addEventListener('click',() => {
 });
 
 
-/* IMPORT BACKUP */
+/* =========================================================
+   IMPORT BACKUP
+   ========================================================= */
 $('importBtn').addEventListener('click',() => {
 
   $('importFile').click();
@@ -1082,12 +1153,12 @@ $('importFile').addEventListener('change',async event => {
     fillForm();
 
     $('saveStatus').textContent =
-      'Backup ဖတ်ပြီးပါပြီ။ Save ကိုနှိပ်ပါ။';
+      '📥 Backup ဖတ်ပြီးပါပြီ။ Save ကိုနှိပ်ပါ။';
 
   } catch(error) {
 
     $('saveStatus').textContent =
-      'JSON ဖိုင် မမှန်ကန်ပါ။';
+      '❌ JSON ဖိုင် မမှန်ကန်ပါ။';
 
   }
 
@@ -1096,7 +1167,9 @@ $('importFile').addEventListener('change',async event => {
 });
 
 
-/* RESET */
+/* =========================================================
+   RESET
+   ========================================================= */
 $('resetBtn').addEventListener('click',() => {
 
   if(!confirm(
@@ -1110,12 +1183,14 @@ $('resetBtn').addEventListener('click',() => {
   fillForm();
 
   $('saveStatus').textContent =
-    'မူလအချက်အလက်များ ပြန်ထားပြီးပါပြီ။';
+    '♻️ မူလအချက်အလက်များ ပြန်ထားပြီးပါပြီ။';
 
 });
 
 
-/* AUTO LOGIN FOR CURRENT TAB SESSION */
+/* =========================================================
+   AUTO LOGIN FOR CURRENT TAB SESSION
+   ========================================================= */
 if(sessionStorage.getItem('athAdminSession') === '1') {
 
   showAdmin();
