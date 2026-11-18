@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>ATH OWAY | Admin Panel</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+Myanmar:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg:#11120f;
+  --panel:#1b1c18;
+  --panel2:#24251f;
+  --gold:#d6ad57;
+  --gold2:#f0d28b;
+  --text:#f4f0e6;
+  --muted:#b6b1a4;
+  --line:rgba(255,255,255,.12);
+  --red:#e46b65;
+  --green:#83c995;
+}
+
+* { box-sizing:border-box; }
+
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Noto Sans Myanmar','DM Sans',sans-serif;
+  line-height:1.65;
+}
+
+button,input,textarea,select {
+  font:inherit;
+}
+
+.shell {
+  width:min(1100px,calc(100% - 28px));
+  margin:28px auto 60px;
+}
+
+header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  margin-bottom:22px;
+}
+
+.brand {
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo {
+  width:48px;
+  height:48px;
+  border:1px solid var(--gold);
+  border-radius:15px;
+  display:grid;
+  place-items:center;
+  color:var(--gold2);
+  font:bold 17px 'DM Sans';
+  flex-shrink:0;
+}
+
+h1 {
+  font-size:22px;
+  margin:0;
+}
+
+.sub {
+  color:var(--muted);
+  font-size:12px;
+}
+
+.panel {
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:22px;
+  margin:16px 0;
+}
+
+h2 {
+  font-size:17px;
+  margin:0 0 16px;
+  color:var(--gold2);
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+
+.field {
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.field.full {
+  grid-column:1/-1;
+}
+
+label {
+  font-size:12px;
+  color:var(--muted);
+}
+
+input,textarea,select {
+  width:100%;
+  background:#10110e;
+  color:var(--text);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:11px 12px;
+  outline:none;
+}
+
+input:focus,textarea:focus {
+  border-color:var(--gold);
+}
+
+textarea {
+  min-height:85px;
+  resize:vertical;
+}
+
+.actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:18px;
+}
+
+button,.button {
+  border:0;
+  border-radius:10px;
+  padding:10px 16px;
+  font-weight:700;
+  cursor:pointer;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.primary {
+  background:linear-gradient(135deg,var(--gold2),var(--gold));
+  color:#211b0f;
+}
+
+.secondary {
+  background:#303128;
+  color:var(--text);
+  border:1px solid var(--line);
+}
+
+.danger {
+  background:#482522;
+  color:#ffd9d5;
+  border:1px solid #8d4540;
+}
+
+.status {
+  font-size:12px;
+  color:var(--green);
+  min-height:22px;
+  margin-top:10px;
+}
+
+.note {
+  font-size:12px;
+  color:var(--muted);
+  padding:12px;
+  border:1px dashed var(--line);
+  border-radius:10px;
+}
+
+.hidden {
+  display:none!important;
+}
+
+.login {
+  max-width:420px;
+  margin:10vh auto;
+}
+
+.item {
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  margin:12px 0;
+  background:var(--panel2);
+}
+
+.item-head {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.item-head b {
+  font-size:13px;
+  color:var(--gold2);
+}
+
+.small {
+  font-size:11px;
+  color:var(--muted);
+}
+
+.badge {
+  display:inline-block;
+  padding:3px 9px;
+  border-radius:20px;
+  font-size:11px;
+  border:1px solid var(--line);
+  color:var(--muted);
+  margin-left:6px;
+}
+
+.badge.ok {
+  color:var(--green);
+  border-color:rgba(131,201,149,.4);
+  background:rgba(131,201,149,.08);
+}
+
+@media(max-width:650px) {
+  .grid {
+    grid-template-columns:1fr;
+  }
+
+  .field.full {
+    grid-column:auto;
+  }
+
+  header {
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .panel {
+    padding:16px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<main class="shell">
+
+<!-- LOGIN -->
+<section id="loginPanel" class="panel login">
+
+  <div class="brand">
+    <div class="logo">ATH</div>
+    <div>
+      <h1>ATH OWAY Admin</h1>
+      <div class="sub">Website Content Management</div>
+    </div>
+  </div>
+
+  <div class="field" style="margin-top:22px">
+    <label for="password">Admin Password</label>
+    <input
+      id="password"
+      type="password"
+      autocomplete="current-password"
+      placeholder="Password"
+    >
+  </div>
+
+  <div class="actions">
+    <button class="primary" id="loginBtn">
+      Login ဝင်ရန်
+    </button>
+  </div>
+
+  <div class="status" id="loginStatus"></div>
+
+  <p class="note">
+    ယာယီ Password သည် <b>ATH@2026</b> ဖြစ်သည်။
+    Code ထဲရှိ ADMIN_PASSWORD ကို ပြောင်းလဲနိုင်သည်။
+    ဤ Password သည် client-side password ဖြစ်ပြီး
+    လုံခြုံသော server authentication မဟုတ်ပါ။
+  </p>
+
+</section>
+
+
+<!-- ADMIN PANEL -->
+<section id="adminPanel" class="hidden">
+
+<header>
+
+  <div class="brand">
+    <div class="logo">ATH</div>
+    <div>
+      <h1>ATH OWAY Admin Panel</h1>
+      <div class="sub">
+        Website အကြောင်းအရာများ ပြင်ဆင်ရန်
+      </div>
+    </div>
+  </div>
+
+  <div class="actions" style="margin:0">
+    <a
+      class="button secondary"
+      href="./index.html"
+      target="_blank"
+    >
+      Website ကြည့်ရန် ↗
+    </a>
+
+    <button class="secondary" id="logoutBtn">
+      Logout
+    </button>
+  </div>
+
+</header>
+
+
+<!-- HOME -->
+<div class="panel">
+
+  <h2>ပင်မစာမျက်နှာ (HOME)</h2>
+
+  <div class="grid">
+
+    <div class="field">
+      <label>အပေါ်စာတန်း</label>
+      <input id="heroEyebrow">
+    </div>
+
+    <div class="field">
+      <label>ဝန်ဆောင်မှုအချိန်</label>
+      <input id="hours">
+    </div>
+
+    <div class="field full">
+      <label>အဓိကခေါင်းစဉ်</label>
+      <input id="heroTitle">
+    </div>
+
+    <div class="field full">
+      <label>အဓိကစာသား</label>
+      <textarea id="heroText"></textarea>
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- PROFILE -->
+<div class="panel">
+
+  <h2>ဆက်သွယ်ရန်နှင့် ကိုယ်ရေးအချက်အလက်</h2>
+
+  <div class="grid">
+
+    <div class="field">
+      <label>အမည်</label>
+      <input id="ownerName">
+    </div>
+
+    <div class="field">
+      <label>လုပ်ငန်းအမည်</label>
+      <input id="businessName">
+    </div>
+
+    <div class="field">
+      <label>ဖုန်းနံပါတ်</label>
+      <input id="phone">
+    </div>
+
+    <div class="field">
+      <label>ဝန်ဆောင်မှုဧရိယာ</label>
+      <input id="area">
+    </div>
+
+    <div class="field">
+      <label>ယာဉ်အမျိုးအစား</label>
+      <input id="vehicle">
+    </div>
+
+    <div class="field">
+      <label>Viber နံပါတ်</label>
+      <input id="viber">
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- SERVICES -->
+<div class="panel">
+
+  <h2>ဝန်ဆောင်မှုများ (SERVICES)</h2>
+
+  <div id="servicesList"></div>
+
+  <div class="actions">
+    <button class="secondary" id="addService">
+      + ဝန်ဆောင်မှုထည့်ရန်
+    </button>
+  </div>
+
+</div>
+
+
+<!-- PLACES -->
+<div class="panel">
+
+  <h2>လည်ပတ်စရာနေရာများ (PLACES)</h2>
+
+  <div id="placesList"></div>
+
+  <div class="actions">
+    <button class="secondary" id="addPlace">
+      + နေရာအသစ်ထည့်ရန်
+    </button>
+  </div>
+
+</div>
+
+
+<!-- PRICES -->
+<div class="panel">
+
+  <h2>ခရီးစဉ်စျေးနှုန်းများ (PRICE)</h2>
+
+  <div id="pricesList"></div>
+
+  <div class="actions">
+    <button class="secondary" id="addPrice">
+      + စျေးနှုန်းအသစ်ထည့်ရန်
+    </button>
+  </div>
+
+</div>
+
+
+<!-- SAVE -->
+<div class="panel">
+
+  <h2>သိမ်းဆည်းခြင်း</h2>
+
+  <p class="note">
+    Save လုပ်ပါက ဤ browser ၏ LocalStorage ထဲတွင်သာ
+    သိမ်းဆည်းပါမည်။ အခြားဖုန်းနှင့် ကွန်ပျူတာများသို့
+    အလိုအလျောက် မရောက်ပါ။
+    <br><br>
+    <b>အရေးကြီး:</b> ဤ admin.html နှင့် index.html ကို
+    <b>တူတူ host / folder</b> ထဲမှာ ထားရပါမည်။
+    (file:// ဖြင့် ဖွင့်ပါက LocalStorage မျှဝေမည် မဟုတ်ပါ။
+    localhost သို့မဟုတ် domain ဖြင့် ဖွင့်ပါ။)
+  </p>
+
+  <div class="actions">
+
+    <button class="primary" id="saveBtn">
+      ပြင်ဆင်ချက်များ သိမ်းမည်
+    </button>
+
+    <button class="secondary" id="exportBtn">
+      Backup JSON ထုတ်မည်
+    </button>
+
+    <button class="secondary" id="importBtn">
+      Backup JSON ထည့်မည်
+    </button>
+
+    <input
+      class="hidden"
+      type="file"
+      id="importFile"
+      accept="application/json"
+    >
+
+    <button class="danger" id="resetBtn">
+      မူလအတိုင်း ပြန်ထားမည်
+    </button>
+
+  </div>
+
+  <div class="status" id="saveStatus"></div>
+
+</div>
+
+<p class="small">
+  ATH OWAY SERVICES · Admin Panel
+</p>
+
+</section>
+</main>
+
+
+<script>
+'use strict';
+
+/* =========================================================
+   ADMIN PASSWORD
+   ========================================================= */
+const ADMIN_PASSWORD = 'ATH@2026';
+
+/* =========================================================
+   LOCALSTORAGE KEY — index.html နှင့် တူတူဖြစ်ရမည်
+   ========================================================= */
+const STORAGE_KEY = 'athOwayContentV1';
+
+
+/* =========================================================
+   DEFAULT WEBSITE DATA
+   ========================================================= */
+const DEFAULTS = {
+
+  heroEyebrow:
+    'NAYPYIDAW • TRUSTED LOCAL TRANSPORT',
+
+  heroTitle:
+    'သွားလိုရာခရီးကို အဆင်ပြေချောမွေ့စွာ',
+
+  heroText:
+    'ဘုရားဖူးခရီးစဉ်၊ ခရီးသည်ပို့ဆောင်ရေးနှင့် ကုန်ပစ္စည်းပို့ဆောင်ရေး ဝန်ဆောင်မှုများကို ယုံကြည်စိတ်ချစွာ စီစဉ်ပို့ဆောင်ပေးပါသည်။',
+
+  hours:
+    'နေ့စဉ် ဝန်ဆောင်ချိန် · နံနက် ၆:၀၀ မှ ည ၉:၀၀',
+
+  ownerName:
+    'အောင်သူထွေး',
+
+  businessName:
+    'နေပြည်တော် ATH OWAY SERVICES',
+
+  phone:
+    '09789999368',
+
+  viber:
+    '+959789999368',
+
+  area:
+    'နေပြည်တော်နှင့် အနီးတစ်ဝိုက်',
+
+  vehicle:
+    'Bajaj Maxima Z သုံးဘီး',
+
+  services: [
+
+    {
+      title:'ဘုရားဖူးခရီးစဉ်',
+      description:'နေပြည်တော်ရှိ အထင်ကရ ဘုရားစေတီများသို့ သွားရောက်ဖူးမြော်နိုင်ရန် ပို့ဆောင်ပေးပါသည်။'
+    },
+
+    {
+      title:'ခရီးသည်ပို့ဆောင်ရေး',
+      description:'မြို့တွင်း၊ ဘူတာရုံ၊ ကားဂိတ်နှင့် လေဆိပ် အသွားအပြန်ခရီးစဉ်များ။'
+    },
+
+    {
+      title:'ကုန်ပစ္စည်းပို့ဆောင်ရေး',
+      description:'သင့်တော်သော အရွယ်အစားနှင့် အလေးချိန်ရှိ ပစ္စည်းများကို ပို့ဆောင်ပေးပါသည်။'
+    }
+
+  ],
+
+  places: [
+
+    {
+      title:'ဥပ္ပါတသန္တိစေတီ',
+      description:'နေပြည်တော်၏ အထင်ကရ စေတီတော်တစ်ဆူ။',
+      map:'https://www.google.com/maps/search/?api=1&query=Uppatasanti+Pagoda+Naypyidaw'
+    },
+
+    {
+      title:'မာရဝိဇယဘုရား',
+      description:'ကြည်ညိုဖွယ်ရာ ဗုဒ္ဓရုပ်ပွားတော်မြတ် တည်ရှိရာနေရာ။',
+      map:'https://www.google.com/maps/search/?api=1&query=Maravijaya+Buddha+Naypyidaw'
+    },
+
+    {
+      title:'မဟာသကျရံသီဘုရား',
+      description:'ဘုရားဖူးလည်ပတ်ရန် စိတ်ဝင်စားဖွယ် နေရာတစ်ခု။',
+      map:'https://www.google.com/maps/search/?api=1&query=Maha+Thakyar+Yanthi+Naypyidaw'
+    },
+
+    {
+      title:'ရေပန်းပန်းခြံ',
+      description:'မိသားစုနှင့်အတူ အပန်းဖြေလည်ပတ်နိုင်သော နေရာ။',
+      map:'https://www.google.com/maps/search/?api=1&query=Water+Fountain+Garden+Naypyidaw'
+    },
+
+    {
+      title:'အမျိုးသားအထင်ကရဥယျာဉ်',
+      description:'မြန်မာနိုင်ငံ၏ အထင်ကရနေရာများကို လေ့လာနိုင်သော ဥယျာဉ်။',
+      map:'https://www.google.com/maps/search/?api=1&query=National+Landmarks+Garden+Naypyidaw'
+    },
+
+    {
+      title:'နေပြည်တော် တိရစ္ဆာန်ဥယျာဉ်',
+      description:'တိရစ္ဆာန်မျိုးစုံကို လေ့လာကြည့်ရှုနိုင်သော နေရာ။',
+      map:'https://www.google.com/maps/search/?api=1&query=Naypyidaw+Zoological+Garden',
+      area:'နေပြည်တော်', township:'ဇမ္ဗူသီရိ', category:'လည်ပတ်စရာ', image:'', address:'', phone:'', hours:'', visible:true
+    },
+    {
+      title:'နေပြည်တော် အပြည်ပြည်ဆိုင်ရာလေဆိပ်',
+      description:'နေပြည်တော်သို့ လေကြောင်းဖြင့် ဝင်ထွက်သွားလာရာ လေဆိပ်။',
+      map:'https://www.google.com/maps/search/?api=1&query=Naypyidaw+International+Airport',
+      area:'နေပြည်တော်', township:'တပ်ကုန်း', category:'လေဆိပ်', image:'', address:'အဲလာ၊ တပ်ကုန်းမြို့နယ်', phone:'', hours:'', visible:true
+    },
+    {
+      title:'အဲလာဘူတာ',
+      description:'အဲလာဒေသရှိ ရထားဘူတာ။ တည်နေရာနှင့် ခရီးစဉ်အချက်အလက်ကို Admin မှ ပြင်ဆင်နိုင်သည်။',
+      map:'https://www.google.com/maps/search/?api=1&query=Aye+Lar+Railway+Station+Myanmar',
+      area:'နေပြည်တော်', township:'တပ်ကုန်း', category:'ရထားဘူတာ', image:'', address:'အဲလာ၊ တပ်ကုန်းမြို့နယ်', phone:'', hours:'', visible:true
+    },
+    {
+      title:'ပင်လောင်းမြို့မဈေး',
+      description:'ပင်လောင်းမြို့အတွင်းရှိ ဒေသခံဈေး။',
+      map:'https://www.google.com/maps/search/?api=1&query=Pinlaung+Market+Myanmar',
+      area:'ပင်လောင်း', township:'ပင်လောင်း', category:'စျေး', image:'', address:'ပင်လောင်းမြို့', phone:'', hours:'', visible:true
+    }
+
+  ],
+
+  prices: [
+
+    {
+      name:'မြို့တွင်း (၅ ကီလိုမီတာအတွင်း)',
+      price:'၅,၀၀၀ ကျပ်'
+    },
+
+    {
+      name:'မြို့တွင်း (၅–၁၀ ကီလိုမီတာ)',
+      price:'၈,၀၀၀ ကျပ်'
+    },
+
+    {
+      name:'လေဆိပ် / ဘူတာရုံ ပို့ဆောင်ရေး',
+      price:'၁၀,၀၀၀ ကျပ်'
+    },
+
+    {
+      name:'ဘုရားဖူးခရီးစဉ် (တစ်နေကုန်)',
+      price:'၂၅,၀၀၀ ကျပ်'
+    },
+
+    {
+      name:'ကုန်ပစ္စည်းပို့ဆောင်ရေး (မြို့တွင်း)',
+      price:'၇,၀၀၀ ကျပ်'
+    },
+
+    {
+      name:'အထူးခရီးစဉ် (ကြိုတင်ညှိနှိုင်း)',
+      price:'ဆက်သွယ်မေးမြန်းပါ'
+    }
+
+  ]
+
+};
+
+
+const $ = id => document.getElementById(id);
+
+let data = JSON.parse(JSON.stringify(DEFAULTS));
+
+
+/* =========================================================
+   LOAD DATA from LocalStorage
+   ========================================================= */
+function loadData() {
+
+  try {
+
+    const saved = localStorage.getItem(STORAGE_KEY);
+
+    if(saved) {
+
+      const parsed = JSON.parse(saved);
+
+      data = {
+        ...JSON.parse(JSON.stringify(DEFAULTS)),
+        ...parsed
+      };
+
+      ['services','places','prices'].forEach(key => {
+
+        if(!Array.isArray(data[key])) {
+          data[key] =
+            JSON.parse(JSON.stringify(DEFAULTS[key]));
+        }
+
+      });
+
+      data.places = data.places.map(place => ({
+        area:'နေပြည်တော်', township:'ဇမ္ဗူသီရိ', category:'လည်ပတ်စရာ',
+        address:'', phone:'', hours:'', image:'', visible:true,
+        ...place
+      }));
+
+    }
+
+  } catch(error) {
+
+    data = JSON.parse(JSON.stringify(DEFAULTS));
+
+  }
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+   ========================================================= */
+function escapeHTML(value) {
+
+  return String(value ?? '').replace(/[&<>"']/g, c => ({
+
+    '&':'&amp;',
+    '<':'&lt;',
+    '>':'&gt;',
+    '"':'&quot;',
+    "'":'&#39;'
+
+  }[c]));
+
+}
+
+
+/* =========================================================
+   INPUT HELPERS
+   ========================================================= */
+function setValue(id,value) {
+  const el = $(id);
+  if (el) el.value = value ?? '';
+}
+
+function getValue(id) {
+  const el = $(id);
+  return el ? el.value.trim() : '';
+}
+
+
+/* =========================================================
+   DYNAMIC LIST RENDER
+   ========================================================= */
+function renderList(containerId,key,fields,labels) {
+
+  const root = $(containerId);
+  if (!root) return;
+  root.innerHTML = '';
+
+  data[key].forEach((item,index) => {
+    const box = document.createElement('div');
+    box.className = 'item';
+    box.innerHTML = `
+      <div class="item-head">
+        <b>${labels} #${index+1}</b>
+        <button type="button" class="danger remove">ဖယ်ရှားရန်</button>
+      </div>
+      <div class="grid">
+        ${fields.map(field => {
+          const value = item[field.key] ?? '';
+          if (field.type === 'select') {
+            return `<div class="field ${field.full?'full':''}">
+              <label>${field.label}</label>
+              <select data-field="${field.key}">
+                ${(field.options||[]).map(opt => `<option value="${escapeHTML(opt)}" ${value===opt?'selected':''}>${escapeHTML(opt)}</option>`).join('')}
+              </select>
+            </div>`;
+          }
+          if (field.type === 'image') {
+            return `<div class="field full">
+              <label>${field.label}</label>
+              <input type="file" accept="image/*" data-image="${field.key}">
+              <small class="muted">ဖုန်း Gallery မှ ဓာတ်ပုံရွေးနိုင်သည်။ ပုံကို အလိုအလျောက် အရွယ်လျှော့သိမ်းမည်။</small>
+              ${value ? `<img src="${value}" alt="နေရာဓာတ်ပုံ" style="width:120px;height:84px;object-fit:cover;border-radius:10px;margin-top:8px">` : ''}
+              <button type="button" class="secondary clear-image" data-clear="${field.key}">ဓာတ်ပုံဖယ်ရန်</button>
+            </div>`;
+          }
+          if (field.type === 'checkbox') {
+            return `<div class="field">
+              <label><input type="checkbox" data-field="${field.key}" ${value!==false?'checked':''} style="width:auto"> ${field.label}</label>
+            </div>`;
+          }
+          return `<div class="field ${field.full?'full':''}">
+            <label>${field.label}</label>
+            ${field.area
+              ? `<textarea data-field="${field.key}">${escapeHTML(value)}</textarea>`
+              : `<input data-field="${field.key}" value="${escapeHTML(value)}" ${field.placeholder?`placeholder="${escapeHTML(field.placeholder)}"`:''}>`}
+          </div>`;
+        }).join('')}
+      </div>`;
+
+    box.querySelectorAll('[data-field]').forEach(input => {
+      const eventName = input.type === 'checkbox' || input.tagName === 'SELECT' ? 'change' : 'input';
+      input.addEventListener(eventName,() => {
+        item[input.dataset.field] = input.type === 'checkbox' ? input.checked : input.value;
+      });
+    });
+
+    box.querySelectorAll('[data-image]').forEach(input => {
+      input.addEventListener('change', async () => {
+        const file = input.files && input.files[0];
+        if (!file) return;
+        if (!file.type.startsWith('image/')) { alert('ဓာတ်ပုံဖိုင်ကိုသာ ရွေးပါ။'); return; }
+        try {
+          item[input.dataset.image] = await compressPlaceImage(file);
+          renderAllLists();
+        } catch (e) {
+          alert('ဓာတ်ပုံကို ဖတ်၍မရပါ။ အခြားပုံတစ်ပုံ ရွေးကြည့်ပါ။');
+        }
+      });
+    });
+
+    box.querySelectorAll('[data-clear]').forEach(btn => {
+      btn.addEventListener('click',() => {
+        item[btn.dataset.clear] = '';
+        renderAllLists();
+      });
+    });
+
+    box.querySelector('.remove').addEventListener('click',() => {
+      if(confirm('ဤနေရာကို အပြီးဖျက်မလား? သိမ်းဆည်းပြီးပါက ခရီးသည် App မှလည်း ပျောက်သွားမည်။')) {
+        data[key].splice(index,1);
+        renderAllLists();
+      }
+    });
+    root.appendChild(box);
+  });
+}
+
+function compressPlaceImage(file) {
+  return new Promise((resolve,reject) => {
+    const reader = new FileReader();
+    reader.onerror = reject;
+    reader.onload = () => {
+      const img = new Image();
+      img.onerror = reject;
+      img.onload = () => {
+        const max = 1000;
+        const scale = Math.min(1,max/Math.max(img.width,img.height));
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.round(img.width*scale);
+        canvas.height = Math.round(img.height*scale);
+        canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);
+        resolve(canvas.toDataURL('image/jpeg',0.78));
+      };
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+/* =========================================================
+   RENDER ALL LISTS
+   ========================================================= */
+function renderAllLists() {
+
+  renderList(
+    'servicesList',
+    'services',
+    [
+      {
+        key:'title',
+        label:'ဝန်ဆောင်မှုအမည်'
+      },
+      {
+        key:'description',
+        label:'ရှင်းလင်းချက်',
+        area:true,
+        full:true
+      }
+    ],
+    'ဝန်ဆောင်မှု'
+  );
+
+
+  renderList(
+    'placesList',
+    'places',
+    [
+      {
+        key:'title',
+        label:'နေရာအမည်'
+      },
+      {
+        key:'area', label:'ဒေသ', type:'select',
+        options:['နေပြည်တော်','ပင်လောင်း']
+      },
+      {
+        key:'township', label:'မြို့နယ်',
+        type:'select',
+        options:['ပုဗ္ဗသီရိ','ဇမ္ဗူသီရိ','ပျဉ်းမနား','လယ်ဝေး','ဇေယျာသီရိ','ဥတ္တရသီရိ','တပ်ကုန်း','ဒက္ခိဏသီရိ','ပင်လောင်း']
+      },
+      {
+        key:'category', label:'အမျိုးအစား', type:'select',
+        options:['လည်ပတ်စရာ','ဘုရား/စေတီ','ပန်းခြံ','ပြတိုက်','ရထားဘူတာ','လေဆိပ်','အဝေးပြေးကားကွင်း','ကားဂိတ်','စျေး','ဆေးရုံ','ဆေးခန်း','ဟိုတယ်','စားသောက်ဆိုင်','ကျောင်း','အခြား']
+      },
+      {
+        key:'description',
+        label:'ရှင်းလင်းချက်',
+        area:true,
+        full:true
+      },
+      { key:'address', label:'လိပ်စာ', full:true },
+      { key:'phone', label:'ဆက်သွယ်ရန်ဖုန်း' },
+      { key:'hours', label:'ဖွင့်ချိန် / ပိတ်ချိန်' },
+      {
+        key:'map',
+        label:'Google Maps URL',
+        full:true
+      },
+      { key:'image', label:'ဓာတ်ပုံ (ဖုန်း Gallery မှရွေးရန်)', type:'image' },
+      { key:'visible', label:'ခရီးသည် App တွင် ပြသရန်', type:'checkbox' }
+    ],
+    'နေရာ'
+  );
+
+
+  renderList(
+    'pricesList',
+    'prices',
+    [
+      {
+        key:'name',
+        label:'ခရီးစဉ်အမျိုးအစား'
+      },
+      {
+        key:'price',
+        label:'စျေးနှုန်း'
+      }
+    ],
+    'စျေးနှုန်း'
+  );
+
+}
+
+
+/* =========================================================
+   FILL FORM
+   ========================================================= */
+function fillForm() {
+
+  [
+    'heroEyebrow',
+    'heroTitle',
+    'heroText',
+    'hours',
+    'ownerName',
+    'businessName',
+    'phone',
+    'viber',
+    'area',
+    'vehicle'
+
+  ].forEach(key => {
+
+    setValue(key,data[key]);
+
+  });
+
+  renderAllLists();
+
+}
+
+
+/* =========================================================
+   READ FORM
+   ========================================================= */
+function readForm() {
+
+  [
+    'heroEyebrow',
+    'heroTitle',
+    'heroText',
+    'hours',
+    'ownerName',
+    'businessName',
+    'phone',
+    'viber',
+    'area',
+    'vehicle'
+
+  ].forEach(key => {
+
+    data[key] = getValue(key);
+
+  });
+
+}
+
+
+/* =========================================================
+   SAVE
+   ========================================================= */
+function save() {
+
+  readForm();
+
+  try {
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(data)
+    );
+
+    $('saveStatus').textContent =
+      '✅ သိမ်းဆည်းပြီးပါပြီ။ ခရီးသည် App ကို refresh လုပ်ပါ။ (လက်ရှိစနစ်မှာ ဒီစက်/Browser ထဲတွင်သာ Sync ဖြစ်ပါသည်။)';
+
+    // ဒီ tab မှာပဲ သိမ်းပြီး အခြား tab ကို storage event ဖြင့် update လုပ်မည်
+
+  } catch(error) {
+
+    $('saveStatus').textContent =
+      '❌ သိမ်းဆည်း၍ မရပါ။ Browser storage ကို စစ်ဆေးပါ။';
+
+  }
+
+}
+
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
+function showAdmin() {
+
+  $('loginPanel').classList.add('hidden');
+
+  $('adminPanel').classList.remove('hidden');
+
+  loadData();
+
+  fillForm();
+
+}
+
+
+$('loginBtn').addEventListener('click',() => {
+
+  if($('password').value === ADMIN_PASSWORD) {
+
+    sessionStorage.setItem('athAdminSession','1');
+
+    $('loginStatus').textContent = '';
+
+    showAdmin();
+
+  } else {
+
+    $('loginStatus').textContent =
+      '❌ Password မှားနေပါသည်။';
+
+  }
+
+});
+
+
+$('password').addEventListener('keydown',event => {
+
+  if(event.key === 'Enter') {
+    $('loginBtn').click();
+  }
+
+});
+
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+$('logoutBtn').addEventListener('click',() => {
+
+  sessionStorage.removeItem('athAdminSession');
+
+  $('adminPanel').classList.add('hidden');
+
+  $('loginPanel').classList.remove('hidden');
+
+  $('password').value = '';
+
+});
+
+
+/* =========================================================
+   SAVE BUTTON
+   ========================================================= */
+$('saveBtn').addEventListener('click',save);
+
+
+/* =========================================================
+   ADD SERVICE
+   ========================================================= */
+$('addService').addEventListener('click',() => {
+
+  readForm();
+
+  data.services.push({
+    title:'',
+    description:''
+  });
+
+  renderAllLists();
+
+});
+
+
+/* =========================================================
+   ADD PLACE
+   ========================================================= */
+$('addPlace').addEventListener('click',() => {
+
+  readForm();
+
+  data.places.push({
+    title:'',
+    description:'',
+    area:'နေပြည်တော်',
+    township:'ဇမ္ဗူသီရိ',
+    category:'လည်ပတ်စရာ',
+    address:'',
+    phone:'',
+    hours:'',
+    map:'',
+    image:'',
+    visible:true
+  });
+
+  renderAllLists();
+
+});
+
+
+/* =========================================================
+   ADD PRICE
+   ========================================================= */
+$('addPrice').addEventListener('click',() => {
+
+  readForm();
+
+  data.prices.push({
+    name:'',
+    price:''
+  });
+
+  renderAllLists();
+
+});
+
+
+/* =========================================================
+   EXPORT BACKUP
+   ========================================================= */
+$('exportBtn').addEventListener('click',() => {
+
+  readForm();
+
+  const blob = new Blob(
+    [JSON.stringify(data,null,2)],
+    {type:'application/json'}
+  );
+
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement('a');
+
+  a.href = url;
+
+  a.download = 'ath-oway-backup.json';
+
+  a.click();
+
+  URL.revokeObjectURL(url);
+
+});
+
+
+/* =========================================================
+   IMPORT BACKUP
+   ========================================================= */
+$('importBtn').addEventListener('click',() => {
+
+  $('importFile').click();
+
+});
+
+
+$('importFile').addEventListener('change',async event => {
+
+  const file = event.target.files[0];
+
+  if(!file) return;
+
+  try {
+
+    const parsed = JSON.parse(await file.text());
+
+    if(!parsed || typeof parsed !== 'object') {
+      throw new Error('Invalid file');
+    }
+
+    data = {
+      ...JSON.parse(JSON.stringify(DEFAULTS)),
+      ...parsed
+    };
+
+    ['services','places','prices'].forEach(key => {
+
+      if(!Array.isArray(data[key])) {
+
+        data[key] =
+          JSON.parse(JSON.stringify(DEFAULTS[key]));
+
+      }
+
+    });
+
+    fillForm();
+
+    $('saveStatus').textContent =
+      '📥 Backup ဖတ်ပြီးပါပြီ။ Save ကိုနှိပ်ပါ။';
+
+  } catch(error) {
+
+    $('saveStatus').textContent =
+      '❌ JSON ဖိုင် မမှန်ကန်ပါ။';
+
+  }
+
+  event.target.value = '';
+
+});
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+$('resetBtn').addEventListener('click',() => {
+
+  if(!confirm(
+    'သိမ်းထားသော ပြင်ဆင်ချက်များကို ဖျက်ပြီး မူလအတိုင်း ပြန်ထားမလား?'
+  )) return;
+
+  data = JSON.parse(JSON.stringify(DEFAULTS));
+
+  localStorage.removeItem(STORAGE_KEY);
+
+  fillForm();
+
+  $('saveStatus').textContent =
+    '♻️ မူလအချက်အလက်များ ပြန်ထားပြီးပါပြီ။';
+
+});
+
+
+/* =========================================================
+   AUTO LOGIN FOR CURRENT TAB SESSION
+   ========================================================= */
+if(sessionStorage.getItem('athAdminSession') === '1') {
+
+  showAdmin();
+
+}
+
+</script>
+
+</body>
+</html>
